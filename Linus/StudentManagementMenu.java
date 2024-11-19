@@ -63,10 +63,11 @@ public class StudentManagementMenu {
         }
     }
 
-    public static void main(String args[]) {
-        StudentManagementMenu smm = new StudentManagementMenu();
-        smm.manageStudentRecords();
-    }
+//    FOR TESTING
+//    public static void main(String args[]) {
+//        StudentManagementMenu smm = new StudentManagementMenu();
+//        smm.manageStudentRecords();
+//    }
 
     private int getMenuSelection() {
         return this.menuSelection;

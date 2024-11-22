@@ -326,13 +326,20 @@ public class StudentManagement {
         return city;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getSex() {
+        return  sex;
+    }
+
     public String getProvince() {
         return province;
     }
 
     public String getPostalCode() {
         return postalCode;
-
-
+    }
 
 }

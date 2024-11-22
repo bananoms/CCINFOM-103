@@ -138,9 +138,12 @@ public class StudentManagementMenu {
 
     // implement backend aspect
     private void deleteStudentRecord() {
+        StudentManagement sm = new StudentManagement();
         // search for a record given student ID
         System.out.println("Enter Student ID for deletion:");
-        // check if record exists
+        // Add code to check if record exists
+        sm.setStudentID(sc.nextInt());
+        sc.nextLine(); // Consume leftover newline
         System.out.println("---------------------------------------------------");
 
         System.out.println("Deleting [STUDENT NAME] ID: [ID NUMBER] Record.");
@@ -148,25 +151,34 @@ public class StudentManagementMenu {
 
     // implement backend aspect
     private void updateStudentRecord() {
+        StudentManagement sm = new StudentManagement();
         // search for a record given student ID
         System.out.println("Enter Student ID:");
-        // check if record exists
+        sm.setStudentID(sc.nextInt());
+        sc.nextLine(); // Consume leftover newline
+
+        // Check if record exists
+        if (sm.getStudentRecord() == 0) {
+            System.out.println("That student does not exist in the records");
+            return;
+        }
 
         // display current record info
         System.out.println("\nCurrent Student Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("First Name                : ");
-        System.out.println("Last Name                 : ");
-        System.out.println("Middle Name               : ");
-        System.out.println("Student ID                : ");
+        System.out.println("First Name                : " + sm.getFirstName());
+        System.out.println("First Name                : " + sm.getFirstName());
+        System.out.println("Last Name                 : " + sm.getLastName());
+        System.out.println("Middle Name               : " + sm.getMiddleName());
+        System.out.println("Student ID                : " + sm.getStudentID());
         System.out.println("Degree                    : ");
-        System.out.println("Email address             : ");
-        System.out.println("Sex (M/F)                 : ");
-        System.out.println("Street Address            : ");
-        System.out.println("Barangay                  : ");
-        System.out.println("City                      : ");
-        System.out.println("Province                  : ");
-        System.out.println("Country                   : ");
+        System.out.println("Email address             : " + sm.getEmail());
+        System.out.println("Sex (M/F)                 : " + sm.getSex());
+        System.out.println("Street Address            : " + sm.getStreetAddress());
+        System.out.println("Barangay                  : " + sm.getBarangay());
+        System.out.println("City                      : " + sm.getCity());
+        System.out.println("Province                  : " + sm.getProvince());
+        System.out.println("Country                   : " + sm.getCountry());
         System.out.println("Current Term Enrolled in  : ");
         // What is RIG?
         System.out.println("Student Type (R,I,G)      : ");
@@ -176,19 +188,54 @@ public class StudentManagementMenu {
         // prompt for new record info
         System.out.println("\nNew Student Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("First Name                : ");
-        System.out.println("Last Name                 : ");
-        System.out.println("Middle Name               : ");
-        System.out.println("Student ID                : ");
-        System.out.println("Degree                    : ");
-        System.out.println("Email address             : ");
-        System.out.println("Sex (M/F)                 : ");
-        System.out.println("Street Address            : ");
-        System.out.println("Barangay                  : ");
-        System.out.println("City                      : ");
-        System.out.println("Province                  : ");
-        System.out.println("Country                   : ");
-        System.out.println("Current Term Enrolled in  : ");
+        // Prompt and set First Name
+        System.out.print("First Name                : ");
+        sm.setFirstName(sc.nextLine());
+
+        // Prompt and set Last Name
+        System.out.print("Last Name                 : ");
+        sm.setLastName(sc.nextLine());
+
+        // Prompt and set Middle Name
+        System.out.print("Middle Name               : ");
+        sm.setMiddleName(sc.nextLine());
+
+        // Prompt and set Student ID
+        System.out.print("Student ID                : ");
+        sm.setStudentID(sc.nextInt());
+        sc.nextLine(); // Consume leftover newline
+
+        // Prompt and set Degree
+        System.out.print("Degree                    : ");
+        int degreeID = sc.nextInt();
+
+        // Prompt and set Email address
+        System.out.print("Email address             : ");
+        sm.setEmail(sc.nextLine());
+
+        // Prompt and set Sex (M/F)
+        System.out.print("Sex (M/F)                 : ");
+        sm.setSex(sc.nextLine().toUpperCase());
+
+        // Prompt and set Street Address
+        System.out.print("Street Address            : ");
+        sm.setStreetAddress(sc.nextLine());
+
+        // Prompt and set Barangay
+        System.out.print("Barangay                  : ");
+        sm.setBarangay(sc.nextLine());
+
+        // Prompt and set City
+        System.out.print("City                      : ");
+        sm.setCity(sc.nextLine());
+
+        // Prompt and set Province
+        System.out.print("Province                  : ");
+        sm.setProvince(sc.nextLine());
+
+        // Prompt and set Country
+        System.out.print("Country                   : ");
+        sm.setCountry(sc.nextLine());
         // What is RIG?
         System.out.println("Student Type (R,I,G)      : ");
         // What is RON in Leave of Absence?
@@ -196,25 +243,34 @@ public class StudentManagementMenu {
     }
 
     private void viewStudentRecord() {
+        StudentManagement sm = new StudentManagement();
         // search for a record given student ID
         System.out.println("Enter Student ID:");
-        // check if record exists
+        sm.setStudentID(sc.nextInt());
+        sc.nextLine(); // Consume leftover newline
+
+        // Check if record exists
+        if (sm.getStudentRecord() == 0) {
+            System.out.println("That student does not exist in the records");
+            return;
+        }
 
         // display current record info
         System.out.println("\nCurrent Student Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("First Name                : ");
-        System.out.println("Last Name                 : ");
-        System.out.println("Middle Name               : ");
-        System.out.println("Student ID                : ");
+        System.out.println("First Name                : " + sm.getFirstName());
+        System.out.println("First Name                : " + sm.getFirstName());
+        System.out.println("Last Name                 : " + sm.getLastName());
+        System.out.println("Middle Name               : " + sm.getMiddleName());
+        System.out.println("Student ID                : " + sm.getStudentID());
         System.out.println("Degree                    : ");
-        System.out.println("Email address             : ");
-        System.out.println("Sex (M/F)                 : ");
-        System.out.println("Street Address            : ");
-        System.out.println("Barangay                  : ");
-        System.out.println("City                      : ");
-        System.out.println("Province                  : ");
-        System.out.println("Country                   : ");
+        System.out.println("Email address             : " + sm.getEmail());
+        System.out.println("Sex (M/F)                 : " + sm.getSex());
+        System.out.println("Street Address            : " + sm.getStreetAddress());
+        System.out.println("Barangay                  : " + sm.getBarangay());
+        System.out.println("City                      : " + sm.getCity());
+        System.out.println("Province                  : " + sm.getProvince());
+        System.out.println("Country                   : " + sm.getCountry());
         System.out.println("Current Term Enrolled in  : ");
         // What is RIG?
         System.out.println("Student Type (R,I,G)      : ");

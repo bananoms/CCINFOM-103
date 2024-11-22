@@ -178,4 +178,54 @@ public class StudentManagement {
             return 0;
         }
     }
+
+    public int getStudentRecord() {
+        int recordCount = 0;
+        try {
+            Connection c;
+            // Establish connection to the database
+            // PLACE DB SERVER LINK HERE!
+            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+            System.out.println("Connection to DB Successful");
+
+            // SQL SELECT statement for retrieving a student's record based on StudentID
+            PreparedStatement sqlStmt = c.prepareStatement(
+                    "SELECT * FROM Students WHERE StudentID=?"
+            );
+
+            sqlStmt.setInt(1, studentID);
+            System.out.println("SQL Statement Prepared");
+            // execute the statement
+            ResultSet rs = sqlStmt.executeQuery();
+
+            // Process the result set
+            while (rs.next()) {
+                recordCount++;
+                firstName       = rs.getString("FirstName");
+                lastName        = rs.getString("LastName");
+                middleName      = rs.getString("MiddleName");
+                birthDate       = rs.getString("BirthDate");
+                sex             = rs.getString("Sex");
+                email           = rs.getString("Email");
+                streetAddress   = rs.getString("StreetAddress");
+                barangay        = rs.getString("Barangay");
+                city            = rs.getString("City");
+                province        = rs.getString("Province");
+                postalCode      = rs.getString("PostalCode");
+                country         = rs.getString("Country");
+                studentType     = rs.getString("StudentType");
+                leaveOfAbsence  = rs.getString("LeaveOfAbsence");
+
+                System.out.println("Record "+ studentID +" was retrieved");
+            }
+
+            sqlStmt.close();
+            c.close();
+            return recordCount; // return number of records found
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
 }

@@ -1,14 +1,14 @@
 package DBAPP;
 import java.sql.*;
 
-public class ViewDegrees {
-    // Attributes for Degree table
+public class DegreeManagement {
+    // Degree attributes
     private int degreeID;
     private String degreeName;
     private String degreeLevel;
-    private int departmentID; // Foreign key to Departments table
+    private int departmentID; // Foreign key to the Departments table
 
-    public ViewDegrees() {
+    public DegreeManagement() {
         this.degreeID = 0;
         this.degreeName = "";
         this.degreeLevel = "";
@@ -43,7 +43,7 @@ public class ViewDegrees {
 
             sqlStmt.close();
             c.close();
-            return recordCount; // Return number of records found
+            return recordCount;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
@@ -67,7 +67,7 @@ public class ViewDegrees {
         return departmentID;
     }
 
-    // Setters for Degree attributes (optional, for external use)
+    // Setters for Degree attributes (optional)
     public void setDegreeID(int degreeID) {
         this.degreeID = degreeID;
     }

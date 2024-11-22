@@ -99,7 +99,7 @@ public class StudentManagement {
         }
     }
 
-    public int deleteStudent() {
+    private int deleteStudent() {
         try {
             Connection c;
             // Establish connection to the database
@@ -118,6 +118,57 @@ public class StudentManagement {
             System.out.println("SQL statement has been prepared");
             sqlStmt.executeUpdate();
             System.out.println("Student Record was deleted.");
+
+            sqlStmt.close();
+            c.close();
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+
+    private int updateStudent() {
+        try {
+            Connection c;
+            // Establish connection to the database
+            // PLACE DB SERVER LINK HERE!
+            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+            System.out.println("Connection to DB Successful!");
+
+            // SQL UPDATE statement for updating a student's record
+            PreparedStatement sqlStmt = c.prepareStatement(
+                    "UPDATE Students SET FirstName=?, LastName=?, MiddleName=?, " +
+                            "BirthDate=?, Sex=?, Email=?, StreetAddress=?, Barangay=?, " +
+                            "City=?, Province=?, PostalCode=?, Country=?, " +
+                            "StudentType=?, LeaveOfAbsence=? WHERE StudentID=?"
+
+                    // ADD STATEMENT FOR THE FOREIGN KEYS
+
+            );
+
+            // Setting values for the placeholders
+            sqlStmt.setString(1, firstName); // FirstName
+            sqlStmt.setString(2, lastName); // LastName
+            sqlStmt.setString(3, middleName); // MiddleName
+            sqlStmt.setString(4, birthDate); // BirthDate
+            sqlStmt.setString(5, sex); // Sex
+            sqlStmt.setString(6, email); // Email
+            sqlStmt.setString(7, streetAddress); // StreetAddress
+            sqlStmt.setString(8, barangay); // Barangay
+            sqlStmt.setString(9, city); // City
+            sqlStmt.setString(10, province); // Province
+            sqlStmt.setString(11, postalCode); // PostalCode
+            sqlStmt.setString(12, country); // Country
+            sqlStmt.setString(13, studentType); // StudentType
+            sqlStmt.setString(14, leaveOfAbsence); // LeaveOfAbsence
+            sqlStmt.setInt(15, studentID); // StudentID (for the WHERE clause)
+
+            System.out.println("SQL Statement Prepared");
+
+            // Execute the update
+            sqlStmt.executeUpdate();
+            System.out.println(" Student Record was updated!");
 
             sqlStmt.close();
             c.close();

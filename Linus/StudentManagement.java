@@ -228,4 +228,68 @@ public class StudentManagement {
         }
     }
 
+
+    // getters and setters
+    private void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+
+    private void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    private void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    private void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    private void setEmail(String email) {
+        this.email = email;
+    }
+
+    private void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    private void setBarangay(String barangay) {
+        this.barangay = barangay;
+    }
+
+    private void setCity(String city) {
+        this.city = city;
+    }
+
+    private void setProvince(String province) {
+        this.province = province;
+    }
+
+    private void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    private void setCountry(String country) {
+        this.country = country;
+    }
+
+    private void setStudentType(String studentType) {
+        this.studentType = studentType;
+    }
+
+    private void setLeaveOfAbsence(String leaveOfAbsence) {
+        this.leaveOfAbsence = leaveOfAbsence;
+    }
+
+    private void setSex(String sex) {
+        this.sex = sex;
+    }
+
+
+
 }

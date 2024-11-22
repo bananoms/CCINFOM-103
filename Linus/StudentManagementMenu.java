@@ -4,6 +4,7 @@ import java.util.*;
 
 public class StudentManagementMenu {
     private int menuSelection;
+    Scanner sc = new Scanner(System.in);
 
     public StudentManagementMenu() {
         this.menuSelection = -1;
@@ -26,7 +27,6 @@ public class StudentManagementMenu {
 
     private void promptForMenuSelection() {
         this.menuSelection = -1;
-        Scanner sc = new Scanner(System.in);
 
         while (this.menuSelection < 0 || this.menuSelection > 4) {
             try {
@@ -76,20 +76,59 @@ public class StudentManagementMenu {
     // implement backend aspect
     // requires code to check if valid inputs (relative to reference table)
     private void addStudentRecord() {
+        StudentManagement sm = new StudentManagement();
         System.out.println("\nEnter Student Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("First Name                : ");
-        System.out.println("Last Name                 : ");
-        System.out.println("Middle Name               : ");
-        System.out.println("Student ID                : ");
-        System.out.println("Degree                    : ");
-        System.out.println("Email address             : ");
-        System.out.println("Sex (M/F)                 : ");
-        System.out.println("Street Address            : ");
-        System.out.println("Barangay                  : ");
-        System.out.println("City                      : ");
-        System.out.println("Province                  : ");
-        System.out.println("Country                   : ");
+
+        // Prompt and set First Name
+        System.out.print("First Name                : ");
+        sm.setFirstName(sc.nextLine());
+
+        // Prompt and set Last Name
+        System.out.print("Last Name                 : ");
+        sm.setLastName(sc.nextLine());
+
+        // Prompt and set Middle Name
+        System.out.print("Middle Name               : ");
+        sm.setMiddleName(sc.nextLine());
+
+        // Prompt and set Student ID
+        System.out.print("Student ID                : ");
+        sm.setStudentID(sc.nextInt());
+        sc.nextLine(); // Consume leftover newline
+
+        // Prompt and set Degree
+        System.out.print("Degree                    : ");
+        int degreeID = sc.nextInt();
+
+        // Prompt and set Email address
+        System.out.print("Email address             : ");
+        sm.setEmail(sc.nextLine());
+
+        // Prompt and set Sex (M/F)
+        System.out.print("Sex (M/F)                 : ");
+        sm.setSex(sc.nextLine().toUpperCase());
+
+        // Prompt and set Street Address
+        System.out.print("Street Address            : ");
+        sm.setStreetAddress(sc.nextLine());
+
+        // Prompt and set Barangay
+        System.out.print("Barangay                  : ");
+        sm.setBarangay(sc.nextLine());
+
+        // Prompt and set City
+        System.out.print("City                      : ");
+        sm.setCity(sc.nextLine());
+
+        // Prompt and set Province
+        System.out.print("Province                  : ");
+        sm.setProvince(sc.nextLine());
+
+        // Prompt and set Country
+        System.out.print("Country                   : ");
+        sm.setCountry(sc.nextLine());
+
         System.out.println("Current Term Enrolled in  : ");
         // What is RIG?
         System.out.println("Student Type (R,I,G)      : ");

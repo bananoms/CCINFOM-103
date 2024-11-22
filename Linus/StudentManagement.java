@@ -290,6 +290,48 @@ public class StudentManagement {
         this.sex = sex;
     }
 
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public String getBarangay() {
+        return barangay;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
 
 
 

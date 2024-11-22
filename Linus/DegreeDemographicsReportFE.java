@@ -54,18 +54,12 @@ public class DegreeDemographicsReportFE {
         // add backend functionality
     }
 
-
     private void reportAverageCGPA() {
         System.out.println("\nAverageCGPA");
         System.out.println("====================================================");
-        System.out.println("Degree Name                           | Average CPA ");
+        System.out.println("Degree Name                          | Average CGPA ");
         System.out.println("----------------------------------------------------");
         // add backend functionality
     }
-
-   public static void main(String[] args) {
-        DegreeDemographicsReportFE dd = new DegreeDemographicsReportFE();
-        dd.displayReportPrompts();
-   }
 
 }

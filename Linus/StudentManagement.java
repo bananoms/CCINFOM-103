@@ -47,13 +47,14 @@ public class StudentManagement {
     }
 
     private int addStudent() {
-        Connection c;
         try {
+            Connection c;
+            // Establish connection to the database
             // PLACE DB SERVER LINK HERE!
-            c = DriverManager.getConnection(" INPUT LINK TO DB SERVER HERE");
+            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
             System.out.println(">>> Connection to DB Successful!");
 
-            // Place your SQL CODE HERE
+            // Place your SQL INSERT CODE HERE
             PreparedStatement sqlStmt = c.prepareStatement(
                     "INSERT INTO Students " +
                             // NOTE: Shouldn't Student ID be automatically generated instead of user input?
@@ -84,6 +85,7 @@ public class StudentManagement {
             sqlStmt.setString(14, studentType); // StudentType
             sqlStmt.setString(15, leaveOfAbsence); // LeaveOfAbsence
 
+            // execute statement
             System.out.println("SQL Statement has been prepared.");
             sqlStmt.executeUpdate();
             System.out.println("Student Record was created!");
@@ -97,4 +99,32 @@ public class StudentManagement {
         }
     }
 
+    public int deleteStudent() {
+        try {
+            Connection c;
+            // Establish connection to the database
+            // PLACE DB SERVER LINK HERE!
+            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+            System.out.println("Connection to DB Successful");
+
+            // Place SQL DELETE statement here!
+            PreparedStatement sqlStmt = c.prepareStatement(
+                    "DELETE FROM Students WHERE StudentID=?"
+                    // Adjust statement to also address FKs
+            );
+            sqlStmt.setInt(1, studentID);
+
+            // execute statement
+            System.out.println("SQL statement has been prepared");
+            sqlStmt.executeUpdate();
+            System.out.println("Student Record was deleted.");
+
+            sqlStmt.close();
+            c.close();
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
 }

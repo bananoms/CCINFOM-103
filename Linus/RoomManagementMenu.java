@@ -1,5 +1,6 @@
 package DBAPP;
-import java.util.*;
+
+import java.util.Scanner;
 
 public class RoomManagementMenu {
     private int menuSelection;
@@ -18,7 +19,7 @@ public class RoomManagementMenu {
         System.out.println("[3] Delete a Room Record");
         System.out.println("[4] View a Room Record");
         System.out.println("----------------------------------------------------");
-        System.out.println("[0]EXIT Room Management");
+        System.out.println("[0] EXIT Room Management");
         System.out.println("====================================================");
         System.out.println(" ");
     }
@@ -44,11 +45,10 @@ public class RoomManagementMenu {
         }
     }
 
-    //    FOR TESTING
-    public static void main(String args[]) {
-        RoomManagementMenu smm = new RoomManagementMenu();
-        smm.manageRoomRecords();
-    }
+//    public static void main(String[] args) {
+//        RoomManagementMenu rmm = new RoomManagementMenu();
+//        rmm.manageRoomRecords();
+//    }
 
     private void promptForMenuSelection() {
         this.menuSelection = -1;
@@ -68,122 +68,119 @@ public class RoomManagementMenu {
         }
     }
 
-    private int getMenuSelection() {
-        return this.menuSelection;
-    }
-
-    // implement backend aspect
-    // requires code to check if valid inputs (relative to reference table)
     private void addRoomRecord() {
         Scanner sc = new Scanner(System.in);
-        String userInput = "";
+        RoomManagement rm = new RoomManagement();
 
         System.out.println("\nEnter Room Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("Room Code                : ");
-        System.out.println("Campus Code              : ");
-        System.out.println("Building Code            : ");
-        System.out.println("Room Type Code           : ");
-        // possible additional field
-        System.out.println("Room Capacity            : ");
-        System.out.println("---------------------------------------------------");
-        System.out.println("Room Created!");
-        System.out.println("Term availability currently set to current term.");
-        System.out.println("Schedule automatically set to available 24/7.");
-        System.out.println("No section assignment yet (NULL) till further adjustment.");
-        System.out.println("---------------------------------------------------");
-        System.out.println("\nWould you like to adjust the term availability, section, and schedule? [y/n]");
 
-        while (!userInput.equalsIgnoreCase("y") && !userInput.equalsIgnoreCase("n")) {
-            System.out.println("Please enter 'y' or 'n':");
-            userInput = sc.nextLine().trim();
+        System.out.print("Room Code                : ");
+        rm.setRoomCode(sc.nextLine());
 
-            if (!userInput.equalsIgnoreCase("y") && !userInput.equalsIgnoreCase("n")) {
-                System.out.println("Invalid input. Please enter 'y' for yes or 'n' for no.");
-            }
-        }
+        System.out.print("Campus Code              : ");
+        rm.setCampusCode(sc.nextLine());
 
-        // Remark: Should we adjust schedule availability and section assignment model?
-        if (userInput.equalsIgnoreCase("y")) {
-           // call methods for schedule and section management here
-            return;
+        System.out.print("Building Code            : ");
+        rm.setBldgCode(sc.nextLine());
+
+        System.out.print("Room Type Code           : ");
+        rm.setType(sc.nextLine());
+
+        System.out.print("Term ID                  : ");
+        // rm.setTermID(sc.nextInt());
+
+        if (rm.addRoom() == 1) {
+            System.out.println("Room Record Created Successfully!");
+        } else {
+            System.out.println("Failed to create Room Record.");
         }
     }
 
     private void deleteRoomRecord() {
-        // search for room record given room ID
-        System.out.println("Enter Room ID: ");
+        Scanner sc = new Scanner(System.in);
+        RoomManagement rm = new RoomManagement();
 
-        // check if record exists
-        System.out.println("---------------------------------------------------");
-        System.out.println("Deleting [ROOM CODE] ID: [ID NUMBER] Record from [BUILDING], [CAMPUS].");
+        System.out.print("Enter Room ID to delete: ");
+        rm.setRoomID(sc.nextInt());
+
+        if (rm.getRoomRecord() == 0) {
+            System.out.println("That Room does not exist in the records.");
+            return;
+        }
+
+        if (rm.deleteRoom() == 1) {
+            System.out.println("Room Record Deleted Successfully!");
+        } else {
+            System.out.println("Failed to delete Room Record.");
+        }
     }
 
     private void viewRoomRecord() {
-        // search for room record given room ID
-        System.out.println("Enter Room ID: ");
-        // check if it exists
+        Scanner sc = new Scanner(System.in);
+        RoomManagement rm = new RoomManagement();
+
+        System.out.print("Enter Room ID to view: ");
+        rm.setRoomID(sc.nextInt());
+
+        if (rm.getRoomRecord() == 0) {
+            System.out.println("That Room does not exist in the records.");
+            return;
+        }
 
         System.out.println("\nCurrent Room Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("Room Code                : ");
-        System.out.println("Campus Code              : ");
-        System.out.println("Building Code            : ");
-        System.out.println("Room Type Code           : ");
-        // possible additional field
-        System.out.println("Room Capacity            : ");
-        System.out.println("Term availability        : ");
-        System.out.println("Section Assignment       : ");
-        System.out.println("Schedule                 : ");
+        System.out.println("Room ID                  : " + rm.getRoomID());
+        System.out.println("Room Code                : " + rm.getRoomCode());
+        System.out.println("Campus Code              : " + rm.getCampusCode());
+        System.out.println("Building Code            : " + rm.getBldgCode());
+        System.out.println("Room Type Code           : " + rm.getType());
+        // System.out.println("Term ID                  : " + rm.getTermID());
     }
 
     private void updateRoomRecord() {
         Scanner sc = new Scanner(System.in);
-        String userInput = "";
+        RoomManagement rm = new RoomManagement();
 
-        // search for room record given room ID
-        System.out.println("Enter Room ID: ");
+        System.out.print("Enter Room ID to update: ");
+        rm.setRoomID(sc.nextInt());
+        sc.nextLine(); // Consume leftover newline
+
+        if (rm.getRoomRecord() == 0) {
+            System.out.println("That Room does not exist in the records.");
+            return;
+        }
 
         System.out.println("\nCurrent Room Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("Room Code                : ");
-        System.out.println("Campus Code              : ");
-        System.out.println("Building Code            : ");
-        System.out.println("Room Type Code           : ");
-        // possible additional field
-        System.out.println("Room Capacity            : ");
-        System.out.println("Term availability        : ");
-        System.out.println("Section Assignment       : ");
-        System.out.println("Schedule                 : ");
+        System.out.println("Room Code                : " + rm.getRoomCode());
+        System.out.println("Campus Code              : " + rm.getCampusCode());
+        System.out.println("Building Code            : " + rm.getBldgCode());
+        System.out.println("Room Type Code           : " + rm.getType());
+        // System.out.println("Term ID                  : " + rm.getTermID());
+
+        System.out.println("\nEnter New Room Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("New Room Information");
-        System.out.println("Room Code                : ");
-        System.out.println("Campus Code              : ");
-        System.out.println("Building Code            : ");
-        System.out.println("Room Type Code           : ");
-        System.out.println("Room Capacity            : ");
 
-        System.out.println("\nWould you also like to update the term availability, section, and schedule?");
+        System.out.print("Room Code                : ");
+        rm.setRoomCode(sc.nextLine());
 
-        while (!userInput.equalsIgnoreCase("y") && !userInput.equalsIgnoreCase("n")) {
-            System.out.println("Please enter 'y' or 'n':");
-            userInput = sc.nextLine().trim();
+        System.out.print("Campus Code              : ");
+        rm.setCampusCode(sc.nextLine());
 
-            if (!userInput.equalsIgnoreCase("y") && !userInput.equalsIgnoreCase("n")) {
-                System.out.println("Invalid input. Please enter 'y' for yes or 'n' for no.");
-            }
-        }
+        System.out.print("Building Code            : ");
+        rm.setBldgCode(sc.nextLine());
 
-        // Remark: Should we adjust schedule availability and section assignment model?
-        if (userInput.equalsIgnoreCase("y")) {
-            System.out.println("\n---------------------------------------------------");
-            System.out.println("Term availability        : ");
-            System.out.println("Section Assignment       : ");
-            System.out.println("Schedule                 : ");
-            // call methods for schedule and section management here
-            System.out.println("\nRoom updated!");
-            return;
+        System.out.print("Room Type Code           : ");
+        rm.setType(sc.nextLine());
+
+        System.out.print("Term ID                  : ");
+        // rm.setTermID(sc.nextInt());
+
+        if (rm.updateRoom() == 1) {
+            System.out.println("Room Record Updated Successfully!");
+        } else {
+            System.out.println("Failed to update Room Record.");
         }
     }
-
 }

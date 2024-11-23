@@ -1,45 +1,42 @@
 import java.sql.*;
 
 public class DegreeManagement {
-    // Degree attributes
+    private String degreeID;
     private String degreeName;
     private String degreeLevel; // ENUM
-    private String collegeAcronym; // Foreign key to College table
+    private String departmentName; // Added department name as per schema
+    private int requiredUnitsForGrad; // Added required units for graduation
 
     public DegreeManagement() {
+        this.degreeID = "";
         this.degreeName = "";
         this.degreeLevel = "";
-        this.collegeAcronym = "";
+        this.departmentName = "";
+        this.requiredUnitsForGrad = 0;
     }
 
-    // Method to get a degree record by DegreeID
+    // Method to get a degree record by DegreeName
     public int getDegreeRecord() {
         int recordCount = 0;
-        try {
-            Connection c;
-            // Establish connection to the database
-            // PLACE DB SERVER LINK HERE!
-            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+        try (Connection c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---")) {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "SELECT * FROM Degrees WHERE DegreeName=?"
+                    "SELECT * FROM Degrees WHERE DegreeID=?"
             );
-
-            sqlStmt.setString(1, degreeName);
-            System.out.println(">>> SQL Statement Prepared");
+            sqlStmt.setString(1, degreeID);
 
             ResultSet rs = sqlStmt.executeQuery();
 
             while (rs.next()) {
                 recordCount++;
-                degreeLevel = rs.getString("DegreeLevel");
-                collegeAcronym = rs.getString("CollegeAcronym");
+                degreeName = rs.getString("DegreeName");
+                degreeLevel =   rs.getString("DegreeLevel");
+                departmentName = rs.getString("DepartmentName");
+                requiredUnitsForGrad = rs.getInt("RequiredUnitsForGrad");
                 System.out.println("Record " + degreeName + " was retrieved");
             }
 
-            sqlStmt.close();
-            c.close();
             return recordCount; // Return number of records found
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -49,27 +46,22 @@ public class DegreeManagement {
 
     // Method to add a degree record
     public int addDegree() {
-        try {
-            Connection c;
-            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+        try (Connection c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---")) {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "INSERT INTO Degrees (DegreeName, DegreeLevel, CollegeAcronym) " +
-                            "VALUES (?, ?, ?)"
+                    "INSERT INTO Degrees (DegreeID, DegreeName, DegreeLevel, DepartmentName, RequiredUnitsForGrad) " +
+                            "VALUES (?, ?, ?, ?, ?)"
             );
-
-            sqlStmt.setString(1, degreeName);
-            sqlStmt.setString(2, degreeLevel);
-            sqlStmt.setString(3, collegeAcronym);
-
-            System.out.println(">>> SQL Statement Prepared");
+            sqlStmt.setString(1, degreeID);
+            sqlStmt.setString(2, degreeName);
+            sqlStmt.setString(3, degreeLevel);
+            sqlStmt.setString(4, departmentName);
+            sqlStmt.setInt(5, requiredUnitsForGrad);
 
             sqlStmt.executeUpdate();
             System.out.println("Degree Record was created!");
 
-            sqlStmt.close();
-            c.close();
             return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -79,26 +71,21 @@ public class DegreeManagement {
 
     // Method to update a degree record
     public int updateDegree() {
-        try {
-            Connection c;
-            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+        try (Connection c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---")) {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "UPDATE Degrees SET DegreeLevel=?, CollegeAcronym=? WHERE DegreeName=?"
+                    "UPDATE Degrees SET DegreeName=?, DegreeLEvel=?, DepartmentName=?, RequiredUnitsForGrad=? WHERE DegreeName=?"
             );
-
-            sqlStmt.setString(1, degreeLevel);
-            sqlStmt.setString(2, collegeAcronym);
-            sqlStmt.setString(3, degreeName);
-
-            System.out.println(">>> SQL Statement Prepared");
+            sqlStmt.setString(1, degreeName);
+            sqlStmt.setString(2, degreeLevel);
+            sqlStmt.setString(3, departmentName);
+            sqlStmt.setInt(4, requiredUnitsForGrad);
+            sqlStmt.setString(5, degreeID);
 
             sqlStmt.executeUpdate();
             System.out.println("Degree Record was updated!");
 
-            sqlStmt.close();
-            c.close();
             return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -108,24 +95,17 @@ public class DegreeManagement {
 
     // Method to delete a degree record
     public int deleteDegree() {
-        try {
-            Connection c;
-            c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
+        try (Connection c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---")) {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "DELETE FROM Degrees WHERE DegreeName=?"
+                    "DELETE FROM Degrees WHERE DegreeID=?"
             );
-
-            sqlStmt.setString(1, degreeName);
-
-            System.out.println(">>> SQL Statement Prepared");
+            sqlStmt.setString(1, degreeID);
 
             sqlStmt.executeUpdate();
             System.out.println("Degree Record was deleted!");
 
-            sqlStmt.close();
-            c.close();
             return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -134,6 +114,14 @@ public class DegreeManagement {
     }
 
     // Getters and setters for Degree attributes
+
+    public void setDegreeID(String degreeID) {
+        this.degreeID = degreeID;
+    }
+
+    public String getDegreeID() {
+        return degreeID;
+    }
 
     public void setDegreeName(String degreeName) {
         this.degreeName = degreeName;
@@ -150,12 +138,21 @@ public class DegreeManagement {
     public String getDegreeLevel() {
         return degreeLevel;
     }
-
-    public void setCollegeAcronym(String collegeAcronym) {
-        this.collegeAcronym = collegeAcronym;
+    
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public String getCollegeAcronym() {
-        return collegeAcronym;
+    public String getDepartmentName() {
+        return departmentName;
     }
+
+    public void setRequiredUnitsForGrad(int requiredUnitsForGrad) {
+        this.requiredUnitsForGrad = requiredUnitsForGrad;
+    }
+
+    public int getRequiredUnitsForGrad() {
+        return requiredUnitsForGrad;
+    }
+    
 }

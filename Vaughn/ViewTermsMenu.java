@@ -1,4 +1,3 @@
-package DBAPP;
 import java.util.Scanner;
 
 public class ViewTermsMenu {
@@ -9,7 +8,8 @@ public class ViewTermsMenu {
         this.menuSelection = -1;
     }
 
-    private static void displayTermsMenu() {
+    // Display the terms menu options
+    private static void displayViewTermMenu() {
         System.out.println(" ");
         System.out.println("====================================================");
         System.out.println("    Term Records Viewer");
@@ -21,6 +21,7 @@ public class ViewTermsMenu {
         System.out.println(" ");
     }
 
+    // Prompt the user for a menu selection
     private void promptForMenuSelection() {
         this.menuSelection = -1;
 
@@ -38,8 +39,9 @@ public class ViewTermsMenu {
         }
     }
 
-    private void manageTermRecords() {
-        displayTermsMenu();
+    // Manage term records based on user menu selection
+    public void viewTermRecords() {
+        displayViewTermMenu();
         promptForMenuSelection();
         switch (this.menuSelection) {
             case 1:
@@ -50,25 +52,28 @@ public class ViewTermsMenu {
         }
     }
 
-    private void viewTermRecord() {
+    // View term record based on term ID
+    public void viewTermRecord() {
         ViewTerms vt = new ViewTerms();
-        System.out.print("Enter Term ID to view: ");
+
+        System.out.print("Enter Term ID: ");
         vt.setTermID(sc.nextInt());
         sc.nextLine(); // Consume leftover newline
 
+        // Check if the term record exists
         if (vt.getTermRecord() == 0) {
             System.out.println("That term does not exist in the records.");
             return;
         }
 
+        // Display the term's information
         System.out.println("\nCurrent Term Information");
         System.out.println("---------------------------------------------------");
         System.out.println("Term ID                  : " + vt.getTermID());
-        System.out.println("Term Number              : " + vt.getTermNumber());
         System.out.println("Academic Year Start      : " + vt.getAcademicYearStart());
         System.out.println("Academic Year End        : " + vt.getAcademicYearEnd());
         System.out.println("Term Start Date          : " + vt.getTermStartDate());
         System.out.println("Term End Date            : " + vt.getTermEndDate());
-        System.out.println("Holiday ID               : " + vt.getHolidayID());
+        System.out.println("Leave of Absence Status  : " + vt.getLeaveOfAbsenceStatus());
     }
 }

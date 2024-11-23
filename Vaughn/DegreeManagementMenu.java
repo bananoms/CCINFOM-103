@@ -8,7 +8,7 @@ public class DegreeManagementMenu {
         this.menuSelection = -1;
     }
 
-    private static void displayDegreeManagementMenu() {
+    public static void displayDegreeManagementMenu() {
         System.out.println(" ");
         System.out.println("====================================================");
         System.out.println("    Degree Management Menu");
@@ -40,7 +40,7 @@ public class DegreeManagementMenu {
         }
     }
 
-    private void manageDegreeRecords() {
+    public void manageDegreeRecords() {
         displayDegreeManagementMenu();
         promptForMenuSelection();
         switch (this.menuSelection) {
@@ -63,9 +63,8 @@ public class DegreeManagementMenu {
 
     private void viewDegreeRecord() {
         DegreeManagement dm = new DegreeManagement();
-        System.out.print("Enter Degree Name to view: ");
-        dm.setDegreeName(sc.nextLine());
-        //sc.nextLine(); // Consume leftover newline
+        System.out.print("Enter Degree ID to view: ");
+        dm.setDegreeID(sc.nextLine());
 
         if (dm.getDegreeRecord() == 0) {
             System.out.println("That degree does not exist in the records.");
@@ -74,9 +73,11 @@ public class DegreeManagementMenu {
 
         System.out.println("\nCurrent Degree Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("Degree Name              : " + dm.getDegreeName());
-        System.out.println("Degree Level             : " + dm.getDegreeLevel());
-        System.out.println("College ID               : " + dm.getCollegeAcronym());
+        System.out.println("Degree ID               : " + dm.getDegreeID());
+        System.out.println("Degree Name             : " + dm.getDegreeName());
+        System.out.println("Degree Level            : " + dm.getDegreeLevel());
+        System.out.println("Department Name         : " + dm.getDepartmentName());
+        System.out.println("Required Units for Grad : " + dm.getRequiredUnitsForGrad());
     }
 
     private void addDegreeRecord() {
@@ -84,14 +85,20 @@ public class DegreeManagementMenu {
         System.out.println("\nEnter Degree Information");
         System.out.println("---------------------------------------------------");
 
-        System.out.print("Degree Name               : ");
+        System.out.print("Degree ID               : ");
+        dm.setDegreeID(sc.nextLine());
+
+        System.out.print("Degree Name             : ");
         dm.setDegreeName(sc.nextLine());
 
-        System.out.print("Degree Level              : ");
+        System.out.print("Degree Level            : ");
         dm.setDegreeLevel(sc.nextLine());
 
-        System.out.print("College    ID             : ");
-        dm.setCollegeAcronym(sc.nextLine());
+        System.out.print("Department Name         : ");
+        dm.setDepartmentName(sc.nextLine());
+
+        System.out.print("Required Units for Grad : ");
+        dm.setRequiredUnitsForGrad(Integer.parseInt(sc.nextLine()));
 
         if (dm.addDegree() == 1) {
             System.out.println(">>> Degree Record has been added!");
@@ -100,9 +107,8 @@ public class DegreeManagementMenu {
 
     private void updateDegreeRecord() {
         DegreeManagement dm = new DegreeManagement();
-        System.out.println("Enter Degree Name to update:");
-        dm.setDegreeName(sc.nextLine());
-        //sc.nextLine(); // Consume leftover newline
+        System.out.println("Enter Degree ID to update:");
+        dm.setDegreeID(sc.nextLine());
 
         if (dm.getDegreeRecord() == 0) {
             System.out.println("That degree does not exist in the records.");
@@ -111,18 +117,26 @@ public class DegreeManagementMenu {
 
         System.out.println("\nCurrent Degree Information");
         System.out.println("---------------------------------------------------");
-        System.out.println("Degree Name              : " + dm.getDegreeName());
-        System.out.println("Degree Level             : " + dm.getDegreeLevel());
-        System.out.println("College ID               : " + dm.getCollegeAcronym());
+        System.out.println("Degree ID               : " + dm.getDegreeID());
+        System.out.println("Degree Name             : " + dm.getDegreeName());
+        System.out.println("Degree Level            : " + dm.getDegreeLevel());
+        System.out.println("Department Name         : " + dm.getDepartmentName());
+        System.out.println("Required Units for Grad : " + dm.getRequiredUnitsForGrad());
 
         System.out.println("\nNew Degree Information");
         System.out.println("---------------------------------------------------");
 
-        System.out.print("Degree Level              : ");
+        System.out.print("Degree Name             : ");
+        dm.setDegreeName(sc.nextLine());
+
+        System.out.print("Degree Level            : ");
         dm.setDegreeLevel(sc.nextLine());
 
-        System.out.print("Department ID             : ");
-        dm.setCollegeAcronym(sc.nextLine());
+        System.out.print("Department Name         : ");
+        dm.setDepartmentName(sc.nextLine());
+
+        System.out.print("Required Units for Grad : ");
+        dm.setRequiredUnitsForGrad(Integer.parseInt(sc.nextLine()));
 
         if (dm.updateDegree() == 1) {
             System.out.println(">>> Degree Record has been updated!");
@@ -131,9 +145,8 @@ public class DegreeManagementMenu {
 
     private void deleteDegreeRecord() {
         DegreeManagement dm = new DegreeManagement();
-        System.out.println("Enter Degree Name to delete:");
-        dm.setDegreeName(sc.nextLine());
-        //sc.nextLine(); // Consume leftover newline
+        System.out.println("Enter Degree ID to delete:");
+        dm.setDegreeID(sc.nextLine());
 
         if (dm.getDegreeRecord() == 0) {
             System.out.println("That degree does not exist in the records.");

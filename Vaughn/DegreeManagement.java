@@ -1,18 +1,15 @@
-package DBAPP;
 import java.sql.*;
 
 public class DegreeManagement {
     // Degree attributes
-    private int degreeID;
     private String degreeName;
-    private String degreeLevel;
-    private int departmentID; // Foreign key to Departments table
+    private String degreeLevel; // ENUM
+    private String collegeAcronym; // Foreign key to College table
 
     public DegreeManagement() {
-        this.degreeID = 0;
         this.degreeName = "";
         this.degreeLevel = "";
-        this.departmentID = 0;
+        this.collegeAcronym = "";
     }
 
     // Method to get a degree record by DegreeID
@@ -20,24 +17,25 @@ public class DegreeManagement {
         int recordCount = 0;
         try {
             Connection c;
+            // Establish connection to the database
+            // PLACE DB SERVER LINK HERE!
             c = DriverManager.getConnection("--- INPUT LINK TO DB SERVER HERE ---");
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "SELECT * FROM Degrees WHERE DegreeID=?"
+                    "SELECT * FROM Degrees WHERE DegreeName=?"
             );
 
-            sqlStmt.setInt(1, degreeID);
+            sqlStmt.setString(1, degreeName);
             System.out.println(">>> SQL Statement Prepared");
 
             ResultSet rs = sqlStmt.executeQuery();
 
             while (rs.next()) {
                 recordCount++;
-                degreeName = rs.getString("DegreeName");
                 degreeLevel = rs.getString("DegreeLevel");
-                departmentID = rs.getInt("DepartmentID");
-                System.out.println("Record " + degreeID + " was retrieved");
+                collegeAcronym = rs.getString("CollegeAcronym");
+                System.out.println("Record " + degreeName + " was retrieved");
             }
 
             sqlStmt.close();
@@ -57,14 +55,13 @@ public class DegreeManagement {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "INSERT INTO Degrees (DegreeID, DegreeName, DegreeLevel, DepartmentID) " +
-                            "VALUES (?, ?, ?, ?)"
+                    "INSERT INTO Degrees (DegreeName, DegreeLevel, CollegeAcronym) " +
+                            "VALUES (?, ?, ?)"
             );
 
-            sqlStmt.setInt(1, degreeID);
-            sqlStmt.setString(2, degreeName);
-            sqlStmt.setString(3, degreeLevel);
-            sqlStmt.setInt(4, departmentID);
+            sqlStmt.setString(1, degreeName);
+            sqlStmt.setString(2, degreeLevel);
+            sqlStmt.setString(3, collegeAcronym);
 
             System.out.println(">>> SQL Statement Prepared");
 
@@ -88,13 +85,12 @@ public class DegreeManagement {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "UPDATE Degrees SET DegreeName=?, DegreeLevel=?, DepartmentID=? WHERE DegreeID=?"
+                    "UPDATE Degrees SET DegreeLevel=?, CollegeAcronym=? WHERE DegreeName=?"
             );
 
-            sqlStmt.setString(1, degreeName);
-            sqlStmt.setString(2, degreeLevel);
-            sqlStmt.setInt(3, departmentID);
-            sqlStmt.setInt(4, degreeID);
+            sqlStmt.setString(1, degreeLevel);
+            sqlStmt.setString(2, collegeAcronym);
+            sqlStmt.setString(3, degreeName);
 
             System.out.println(">>> SQL Statement Prepared");
 
@@ -118,10 +114,10 @@ public class DegreeManagement {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "DELETE FROM Degrees WHERE DegreeID=?"
+                    "DELETE FROM Degrees WHERE DegreeName=?"
             );
 
-            sqlStmt.setInt(1, degreeID);
+            sqlStmt.setString(1, degreeName);
 
             System.out.println(">>> SQL Statement Prepared");
 
@@ -138,13 +134,6 @@ public class DegreeManagement {
     }
 
     // Getters and setters for Degree attributes
-    public void setDegreeID(int degreeID) {
-        this.degreeID = degreeID;
-    }
-
-    public int getDegreeID() {
-        return degreeID;
-    }
 
     public void setDegreeName(String degreeName) {
         this.degreeName = degreeName;
@@ -162,11 +151,11 @@ public class DegreeManagement {
         return degreeLevel;
     }
 
-    public void setDepartmentID(int departmentID) {
-        this.departmentID = departmentID;
+    public void setCollegeAcronym(String collegeAcronym) {
+        this.collegeAcronym = collegeAcronym;
     }
 
-    public int getDepartmentID() {
-        return departmentID;
+    public String getCollegeAcronym() {
+        return collegeAcronym;
     }
 }

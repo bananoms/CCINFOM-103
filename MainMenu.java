@@ -1,5 +1,4 @@
-
-// package DBAPP;
+package DBAPP;
 import java.util.*;
 
 public class MainMenu {

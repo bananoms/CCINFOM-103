@@ -86,7 +86,8 @@ public class MainMenu {
                     // Add Reserve and Book a Room handling here
                     break;
                 case 7:
-                    // Add Leave of Absence handling here
+                    RequestLeaveMenu requestLeaveMenu = new RequestLeaveMenu();
+                    requestLeaveMenu.displayMenu();
                     break;
                 case 8:
                     // Add Room Utilization Report handling here

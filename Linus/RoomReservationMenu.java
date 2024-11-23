@@ -9,7 +9,7 @@ public class RoomReservationMenu {
         this.menuSelection = -1;
     }
 
-    private static void displayRoomManagementMenu() {
+    public static void displayRoomManagementMenu() {
         System.out.println(" ");
         System.out.println("====================================================");
         System.out.println("    Room Reservation Transaction");

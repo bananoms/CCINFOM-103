@@ -25,7 +25,14 @@ public class ViewCourses {
 
             // SQL SELECT statement for retrieving a course record based on CourseCode
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "SELECT * FROM Courses WHERE CourseCode=?"
+                    "SELECT s.studentID, c.CourseCode, g.GradeUnits, 
+                     
+                     
+                     FROM Students s LEFT JOIN Terms t ON s.TermID = t.TermID 
+                                     LEFT JOIN Courses c ON t.TermId = c.TermId
+                                     LEFT JOIN Grades g ON c.CourseCode = g.CourseCode
+                                     LEFT JOIN REF_COURSES rc c.CourseCode = rc.CourseCode
+                    "
             );
 
             sqlStmt.setString(1, courseCode);

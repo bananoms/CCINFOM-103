@@ -8,7 +8,7 @@ public class ViewTeacherRecords {
     private String firstName;
     private String lastName;
     private String middleName;
-    private int departmentID; // Foreign key to Departments table
+    private String departmentName; // Foreign key to Departments table
     private String email;
     private String contactNumber;
     private String sex; // Enum value
@@ -18,7 +18,7 @@ public class ViewTeacherRecords {
         this.firstName = "";
         this.lastName = "";
         this.middleName = "";
-        this.departmentID = 0;
+        this.departmentName = "";
         this.email = "";
         this.contactNumber = "";
         this.sex = "";
@@ -34,7 +34,10 @@ public class ViewTeacherRecords {
 
             // SQL SELECT statement for retrieving a teacher's record based on TeacherID
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "SELECT * FROM Teachers WHERE TeacherID=?"
+                    "SELECT TeacherID, LastName, FirstName, MiddleName, Email, Sex, ContactNumber 
+                     
+                     FROM Teachers t LEFT JOIN DepartmentName dn t.DepartmentName = dn.DepartmentName
+                    "
             );
 
             sqlStmt.setInt(1, teacherID);
@@ -49,7 +52,7 @@ public class ViewTeacherRecords {
                 firstName = rs.getString("FirstName");
                 lastName = rs.getString("LastName");
                 middleName = rs.getString("MiddleName");
-                departmentID = rs.getInt("DepartmentID");
+                departmentName = rs.getString("DeparmentName");
                 email = rs.getString("Email");
                 contactNumber = rs.getString("ContactNumber");
                 sex = rs.getString("Sex");
@@ -114,8 +117,8 @@ public class ViewTeacherRecords {
         this.middleName = middleName;
     }
 
-    public void setDepartmentID(int departmentID) {
-        this.departmentID = departmentID;
+    public void setDepartmentID(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public void setEmail(String email) {

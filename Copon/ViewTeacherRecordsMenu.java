@@ -68,7 +68,7 @@ public class ViewTeacherRecordsMenu {
         System.out.println("Last Name                 : " + tm.getLastName());
         System.out.println("Middle Name               : " + tm.getMiddleName());
         System.out.println("Teacher ID                : " + tm.getTeacherID());
-        System.out.println("Department ID             : " + tm.getDepartmentID());
+        System.out.println("Department ID             : " + tm.getDepartmentName());
         System.out.println("Email address             : " + tm.getEmail());
         System.out.println("Contact Number            : " + tm.getContactNumber());
         System.out.println("Sex (M/F)                 : " + tm.getSex());

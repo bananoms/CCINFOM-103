@@ -83,7 +83,8 @@ public class MainMenu {
                     // Add Course Enrollment & Dropping handling here
                     break;
                 case 6:
-                    // Add Reserve and Book a Room handling here
+                    RoomReservationMenu roomReservationMenu = new RoomReservationMenu();
+                    roomReservationMenu.transactWithRooms();
                     break;
                 case 7:
                     RequestLeaveMenu requestLeaveMenu = new RequestLeaveMenu();

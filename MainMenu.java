@@ -1,3 +1,4 @@
+
 // package DBAPP;
 import java.util.*;
 
@@ -57,8 +58,56 @@ public class MainMenu {
 
     public static void main(String args[]) {
         MainMenu mainMenu = new MainMenu();
-        mainMenu.displayMenu();
-        mainMenu.promptForMenuSelection();
-        System.out.println(mainMenu.getMenuSelection());
+        while (true) {
+            mainMenu.displayMenu();
+            mainMenu.promptForMenuSelection();
+            int selection = mainMenu.getMenuSelection();
+
+            switch (selection) {
+                case 1:
+                    StudentManagementMenu studentMenu = new StudentManagementMenu();
+                    studentMenu.manageStudentRecords();
+                    break;
+                case 2:
+                    DegreeManagementMenu degreeMenu = new DegreeManagementMenu();
+                    degreeMenu.manageDegreeRecords();
+                    break;
+                case 3:
+                    RoomManagementMenu roomMenu = new RoomManagementMenu();
+                    roomMenu.manageRoomRecords();
+                    break;
+                case 4:
+                    CourseEnlistmentMenu courseEnlistmentMenu = new CourseEnlistmentMenu();
+                    courseEnlistmentMenu.displayMenu();
+                    break;
+                case 5:
+                    // Add Course Enrollment & Dropping handling here
+                    break;
+                case 6:
+                    // Add Reserve and Book a Room handling here
+                    break;
+                case 7:
+                    // Add Leave of Absence handling here
+                    break;
+                case 8:
+                    // Add Room Utilization Report handling here
+                    break;
+                case 9:
+                    CourseEnrollmentReportFE courseEnrollmentReportFE = new CourseEnrollmentReportFE();
+                    courseEnrollmentReportFE.displayReportPrompts();
+                    break;
+                case 10:
+                    // Add Batch Completion Rate per Degree handling here
+                    break;
+                case 11:
+                    // Add Degree Demographic Report handling here
+                    break;
+                case 0:
+                    System.out.println("Exiting Application.");
+                    return; // Exit the application
+                default:
+                    System.out.println("Invalid selection. Please try again.");
+            }
+        }
     }
 }

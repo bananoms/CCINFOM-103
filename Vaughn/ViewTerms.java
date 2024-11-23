@@ -1,3 +1,4 @@
+package DBAPP;
 import java.sql.*;
 
 public class ViewTerms {

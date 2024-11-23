@@ -8,7 +8,7 @@ public class RoomManagementMenu {
         this.menuSelection = -1;
     }
 
-    private static void displayRoomManagementMenu() {
+    public static void displayRoomManagementMenu() {
         System.out.println(" ");
         System.out.println("====================================================");
         System.out.println("    Room Management Menu");
@@ -23,7 +23,7 @@ public class RoomManagementMenu {
         System.out.println(" ");
     }
 
-    private void manageRoomRecords() {
+    public void manageRoomRecords() {
         displayRoomManagementMenu();
         promptForMenuSelection();
         switch (this.menuSelection) {

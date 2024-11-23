@@ -1,3 +1,4 @@
+package DBAPP;
 import java.util.Scanner;
 
 public class DegreeManagementMenu {

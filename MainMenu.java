@@ -91,7 +91,8 @@ public class MainMenu {
                     requestLeaveMenu.displayMenu();
                     break;
                 case 8:
-                    // Add Room Utilization Report handling here
+                    RoomUtilizationReport roomUtilizationReport = new RoomUtilizationReport();
+                    roomUtilizationReport.RoomUtilizationReport();
                     break;
                 case 9:
                     CourseEnrollmentReportFE courseEnrollmentReportFE = new CourseEnrollmentReportFE();

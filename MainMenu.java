@@ -100,7 +100,8 @@ public class MainMenu {
                     // Add Batch Completion Rate per Degree handling here
                     break;
                 case 11:
-                    // Add Degree Demographic Report handling here
+                    DegreeDemographicsReportFE degreeDemographicsReportFE = new DegreeDemographicsReportFE();
+                    degreeDemographicsReportFE.displayReportPrompts();
                     break;
                 case 0:
                     System.out.println("Exiting Application.");

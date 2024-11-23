@@ -76,7 +76,7 @@ public class DegreeManagementMenu {
         System.out.println("---------------------------------------------------");
         System.out.println("Degree Name              : " + dm.getDegreeName());
         System.out.println("Degree Level             : " + dm.getDegreeLevel());
-        System.out.println("College ID               : " + dm.getCollegeID());
+        System.out.println("College ID               : " + dm.getCollegeAcronym());
     }
 
     private void addDegreeRecord() {
@@ -91,7 +91,7 @@ public class DegreeManagementMenu {
         dm.setDegreeLevel(sc.nextLine());
 
         System.out.print("College    ID             : ");
-        dm.setCollegeID(sc.nextLine());
+        dm.setCollegeAcronym(sc.nextLine());
 
         if (dm.addDegree() == 1) {
             System.out.println(">>> Degree Record has been added!");
@@ -113,7 +113,7 @@ public class DegreeManagementMenu {
         System.out.println("---------------------------------------------------");
         System.out.println("Degree Name              : " + dm.getDegreeName());
         System.out.println("Degree Level             : " + dm.getDegreeLevel());
-        System.out.println("College ID               : " + dm.getCollegeID());
+        System.out.println("College ID               : " + dm.getCollegeAcronym());
 
         System.out.println("\nNew Degree Information");
         System.out.println("---------------------------------------------------");
@@ -122,7 +122,7 @@ public class DegreeManagementMenu {
         dm.setDegreeLevel(sc.nextLine());
 
         System.out.print("Department ID             : ");
-        dm.setCollegeID(sc.nextLine());
+        dm.setCollegeAcronym(sc.nextLine());
 
         if (dm.updateDegree() == 1) {
             System.out.println(">>> Degree Record has been updated!");

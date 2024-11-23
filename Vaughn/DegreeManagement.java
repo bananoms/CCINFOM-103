@@ -4,12 +4,12 @@ public class DegreeManagement {
     // Degree attributes
     private String degreeName;
     private String degreeLevel; // ENUM
-    private String collegeID; // Foreign key to College table
+    private String collegeAcronym; // Foreign key to College table
 
     public DegreeManagement() {
         this.degreeName = "";
         this.degreeLevel = "";
-        this.collegeID = "";
+        this.collegeAcronym = "";
     }
 
     // Method to get a degree record by DegreeID
@@ -34,7 +34,7 @@ public class DegreeManagement {
             while (rs.next()) {
                 recordCount++;
                 degreeLevel = rs.getString("DegreeLevel");
-                collegeID = rs.getString("CollegeID");
+                collegeAcronym = rs.getString("CollegeAcronym");
                 System.out.println("Record " + degreeName + " was retrieved");
             }
 
@@ -55,13 +55,13 @@ public class DegreeManagement {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "INSERT INTO Degrees (DegreeName, DegreeLevel, CollegeID) " +
+                    "INSERT INTO Degrees (DegreeName, DegreeLevel, CollegeAcronym) " +
                             "VALUES (?, ?, ?)"
             );
 
             sqlStmt.setString(1, degreeName);
             sqlStmt.setString(2, degreeLevel);
-            sqlStmt.setString(3, collegeID);
+            sqlStmt.setString(3, collegeAcronym);
 
             System.out.println(">>> SQL Statement Prepared");
 
@@ -85,11 +85,11 @@ public class DegreeManagement {
             System.out.println(">>> Connection to DB Successful!");
 
             PreparedStatement sqlStmt = c.prepareStatement(
-                    "UPDATE Degrees SET DegreeLevel=?, CollegeID=? WHERE DegreeName=?"
+                    "UPDATE Degrees SET DegreeLevel=?, CollegeAcronym=? WHERE DegreeName=?"
             );
 
             sqlStmt.setString(1, degreeLevel);
-            sqlStmt.setString(2, collegeID);
+            sqlStmt.setString(2, collegeAcronym);
             sqlStmt.setString(3, degreeName);
 
             System.out.println(">>> SQL Statement Prepared");
@@ -151,11 +151,11 @@ public class DegreeManagement {
         return degreeLevel;
     }
 
-    public void setCollegeID(String collegeID) {
-        this.collegeID = collegeID;
+    public void setCollegeAcronym(String collegeAcronym) {
+        this.collegeAcronym = collegeAcronym;
     }
 
-    public String getCollegeID() {
-        return collegeID;
+    public String getCollegeAcronym() {
+        return collegeAcronym;
     }
 }
